@@ -11,24 +11,6 @@ public class QuickSort3 {
         }
     }
 
-    private static int find(int[] arr, int x) {
-        if (arr == null || arr.length == 0) return -1;
-        int left = 0;
-        int right = arr.length - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] > x) {
-                right = mid - 1;
-            } else if (arr[mid] < x) {
-                left = mid + 1;
-            } else {
-                return mid;
-            }
-        }
-        return -1;
-    }
-
-
     public static void quickSort(int[] arr,int L,int R){
         if(arr == null || arr.length < 2){
             return;
