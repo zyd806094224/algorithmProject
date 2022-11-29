@@ -7,25 +7,17 @@ import com.algorithm.entity.ListNode;
  */
 public class ReverseListNode {
     public static void main(String[] args) {
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(3);
-        ListNode listNode4 = new ListNode(4);
-        ListNode listNode5 = new ListNode(5);
-        listNode1.next = listNode2;
-        listNode2.next = listNode3;
-        listNode3.next = listNode4;
-        listNode4.next = listNode5;
-        ListNode res = reverse(listNode1);
+        ListNode aListNode = ListNode.getAListNode();
+        ListNode res = reverse(aListNode);
         while (res != null){
             System.out.print(res.value + ",");
             res = res.next;
         }
     }
 
-    private static ListNode reverse(ListNode listNode){
-        if(listNode == null || listNode.next == null) return listNode;
-        ListNode next,prev = null,curr = listNode;
+    private static ListNode reverse(ListNode head){
+        if(head == null || head.next == null) return head;
+        ListNode next,prev = null,curr = head;
         while(curr != null){
             next = curr.next;
             curr.next = prev;
