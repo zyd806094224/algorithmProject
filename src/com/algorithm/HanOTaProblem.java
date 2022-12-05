@@ -1,5 +1,8 @@
 package com.algorithm;
 
+/**
+ * 汉诺塔问题
+ */
 public class HanOTaProblem {
 
     public static void main(String[] args) {
