@@ -28,4 +28,22 @@ public class ListNode {
         listNode4.next = listNode5;
         return head;
     }
+
+    /**
+     * 获取一个环形链表
+     * @return
+     */
+    public static ListNode getAAnnularListNode(){
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
+        ListNode listNode5 = new ListNode(5);
+        listNode1.next = listNode2;
+        listNode2.next = listNode3;
+        listNode3.next = listNode4;
+        listNode4.next = listNode5;
+        listNode5.next = listNode3;
+        return listNode1;
+    }
 }
