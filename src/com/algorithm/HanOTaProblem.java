@@ -16,9 +16,9 @@ public class HanOTaProblem {
         }
         //把N - 1个从start移动到other
         hanota(N - 1,start,other,end);
-        //把最大的N 从start移动到end
+        //把第N个最大的 从start移动到end
         System.out.println("move " + N + " from" +  start + "---->" + end);
-        //把N- 1个 从other移动到start位置
+        //再把N - 1个 全部 从other移动到end位置
         hanota(N - 1,other,end,start);
     }
 
