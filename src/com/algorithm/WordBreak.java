@@ -20,7 +20,7 @@ public class WordBreak {
         boolean[] dp = new boolean[s.length() + 1]; //dp[i]表示从0开始对应的长度的字符是否成功匹配成功，最终返回dp[s.length()]
         dp[0] = true;
         for (int i = 1; i <= s.length(); i++) {
-            for (int j = 0; j < s.length(); j++) {
+            for (int j = 0; j < i; j++) {
                 if (dp[j] && wordDict.contains(s.substring(j, i))) {
                     dp[i] = true;
                 }
