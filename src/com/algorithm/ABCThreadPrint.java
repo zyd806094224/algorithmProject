@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ABCThreadPrint {
 
     public static void main(String[] args) {
-        Data data = new Data();
+        /*Data data = new Data();
         int count = 5;
         new Thread(() -> {
             for (int i = 0; i < count; i++) {
@@ -23,10 +23,33 @@ public class ABCThreadPrint {
             for (int i = 0; i < count; i++) {
                 data.printC();
             }
-        }, "C").start();
+        }, "C").start();*/
+
+        Data2 data2 = new Data2();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data2.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "A").start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data2.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "B").start();
     }
 }
 
+/**
+ * 等待 -> 业务 -> 通知
+ */
 class Data {
     Lock lock = new ReentrantLock();
     Condition conditionA = lock.newCondition();
@@ -80,5 +103,30 @@ class Data {
         } finally {
             lock.unlock();
         }
+    }
+}
+
+/**
+ * 数据类 等待、业务、通知
+ */
+class Data2 {
+    int num = 0;
+
+    public synchronized void increment() throws InterruptedException {
+        while (num != 0) {
+            this.wait();
+        }
+        num++;
+        System.out.println("当前线程:" + Thread.currentThread().getName() + "---->" + num);
+        this.notifyAll();
+    }
+
+    public synchronized void decrement() throws InterruptedException {
+        while (num == 0) {
+            this.wait();
+        }
+        num--;
+        System.out.println("当前线程:" + Thread.currentThread().getName() + "---->" + num);
+        this.notifyAll();
     }
 }
