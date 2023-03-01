@@ -9,6 +9,7 @@ public class KnapsackProblem {
         System.out.println(getMaxValue(weight, value, 0, 0, bag));
         System.out.println(dpWays(weight, value, bag));
         System.out.println(dpWays2(weight, value, bag));
+        System.out.println(dpWays3(weight, value, bag));
     }
 
     private static int getMaxValue(int[] w, int[] v, int index, int alreadyW, int bag) {
@@ -63,5 +64,18 @@ public class KnapsackProblem {
         return dp[w.length][bag];
     }
 
+    private static int dpWays3(int[] w, int[] v, int bag) {
+        int[][] dp = new int[bag + 1][w.length + 1];
+        for (int i = 1; i <= bag; i++) {
+            for (int j = 1; j <= w.length; j++) {
+                if (i >= w[j - 1]) {
+                    dp[i][j] = Math.max(dp[i - w[j - 1]][j] + v[j - 1], dp[i][j - 1]);
+                } else {
+                    dp[i][j] = dp[i][j - 1];
+                }
+            }
+        }
+        return dp[bag][w.length];
+    }
 
 }
